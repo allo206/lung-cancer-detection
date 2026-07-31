@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+
+lung_subset_small/
+
+temp_image.jpg
