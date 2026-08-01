@@ -16,13 +16,37 @@ st.set_page_config(
 # -----------------------------
 st.title("🏥 MedScan AI")
 st.subheader("Lung Cancer Detection System")
-st.write("Upload a Lung CT Scan image for AI-assisted analysis.")
+st.write("Upload a Lung Histopathology Image for AI-assisted Analysis.")
+
+# -----------------------------
+# Information
+# -----------------------------
+st.info("""
+📌 Supported Image Type
+
+✔ Lung Histopathology (Microscopic Tissue) Images Only
+""")
+
+st.warning("""
+📌 Supported Tissue Types
+
+🟢 Normal Lung Tissue
+
+🔴 Lung Adenocarcinoma
+
+🔴 Lung Squamous Cell Carcinoma
+
+⚠ Important Warning
+
+Please upload only supported lung histopathology images.
+
+Images outside the supported tissue types may not be classified accurately.""")
 
 # -----------------------------
 # Upload Image
 # -----------------------------
 uploaded_file = st.file_uploader(
-    "Choose a CT Scan Image",
+    "Choose a Histopathology Image",
     type=["jpg", "jpeg", "png"]
 )
 
@@ -35,7 +59,7 @@ if uploaded_file is not None:
 
     st.image(
         img,
-        caption="Uploaded CT Scan",
+        caption="Uploaded Histopathology Image",
         use_container_width=True
     )
 
@@ -43,9 +67,9 @@ if uploaded_file is not None:
 
     st.write("")
 
-    if st.button("🔍 Analyze Scan"):
+    if st.button("🔍 Analyze Image"):
 
-        with st.spinner("Analyzing CT Scan..."):
+        with st.spinner("Analyzing Histopathology Image..."):
 
             predicted_class, confidence = predict_lung_image("temp_image.jpg")
 
@@ -53,23 +77,23 @@ if uploaded_file is not None:
 
         st.divider()
 
-        st.subheader(" Analysis Report")
+        st.subheader("Analysis Report")
 
         if predicted_class == "Normal Lung":
 
-            st.success("🟢 Normal Lung")
+            st.success("🟢 Normal Lung Tissue")
 
         elif predicted_class == "Adenocarcinoma":
 
-            st.error("🔴 Adenocarcinoma")
+            st.error("🔴 Lung Adenocarcinoma")
 
         else:
 
-            st.error("🔴 Squamous Cell Carcinoma")
+            st.error("🔴 Lung Squamous Cell Carcinoma")
 
         st.write(f"### Confidence : {confidence:.2f}%")
 
-        st.progress(float(confidence) / 100)
+        st.progress(confidence / 100)
 
         st.divider()
 
@@ -77,10 +101,10 @@ if uploaded_file is not None:
 
         if predicted_class == "Normal Lung":
 
-            st.success("No signs of lung cancer detected.")
+            st.success("No signs of lung cancer detected in the uploaded histopathology image.")
 
         else:
 
             st.warning(
-                "Please consult a qualified medical specialist for further diagnosis."
+                "Please consult a qualified pathologist or oncologist for further diagnosis."
             )
