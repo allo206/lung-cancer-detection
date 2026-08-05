@@ -77,9 +77,9 @@ https://lung-cancer-detection-uanyjzgwu2crjarsfjmgju.streamlit.app/
 
 ---
 
-## 🎥 Deployment Video
+## 🎥 Deployment Demo Video
 
-The deployment demonstration video is available in the **Project_demo_video** folder of this repository..
+https://drive.google.com/file/d/1pN35UD9kjQztF9ZGZ_4hfd6wvCUyIvWO/view?usp=sharing
 
 ---
 
